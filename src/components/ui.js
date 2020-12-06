@@ -496,7 +496,10 @@ AFRAME.registerComponent('ui', {
 
   playSound: function (sound, objName) { //TODO Doesn't like quick repeats
     if (objName === undefined || !this.pressedObjects[objName]) {
-      document.getElementById(sound).play();
+      let soundEl = document.getElementById(sound);
+      if (soundEl) {
+        soundEl.play();
+      }
     }
   }
 });
