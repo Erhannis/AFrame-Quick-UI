@@ -18,23 +18,6 @@ Spinner
 Dial
 */
 
- /*
-UiRoot(
-    FoldLayout(
-        GridLayout({cols:4},
-            UiButton({oncontrollerdown:(function(){this.setAttribute('color', '#88CCAA');}),size:[3,3]}),
-            UiButton({oncontrollerdown:(function(){this.setAttribute('visible', false);}),size:[1,2]}),
-            UiButton()
-        ),
-        RowsLayout(),
-        TabsLayout( //TODO Icons, labels
-            GridLayout({rows:4}),
-            UiButton()
-        )
-    )
-);
-*/
-
 let _ = require('lodash');
 
 //TODO Man, I should really nail down the name
