@@ -3,7 +3,7 @@
 AFRAME.registerComponent('json-model', {
   schema: {
     src: {type: 'asset'} // Or:
-    ,data: {type: 'array'} //TODO Is this how you do this?
+    //,data: {type: 'object'} //TODO Is this how you do this?
   },
 
   init: function () {

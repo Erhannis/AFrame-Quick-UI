@@ -32,14 +32,16 @@ AFRAME.registerComponent('paint-controls', {
       }
 
       tooltips = Utils.getTooltips(controllerName);
-      if (controllerName.indexOf('windows-motion') >= 0) {
-        // el.setAttribute('teleport-controls', {button: 'trackpad'});
-      } else if (controllerName === 'oculus-touch-controls') {
-        var hand = evt.detail.component.data.hand;
-        //el.setAttribute('teleport-controls', {button: hand === 'left' ? 'ybutton' : 'bbutton'});
-        el.setAttribute('obj-model', {obj: 'assets/models/oculus-' + hand + '-controller.obj', mtl: 'https://cdn.aframe.io/controllers/oculus/oculus-touch-controller-' + hand + '.mtl'});
-      } else if (controllerName === 'vive-controls') {
-        el.setAttribute('json-model', CONTROLLER_MODEL);
+      let model = CONTROLLER_MODELS[controllerName];
+      if (model) {
+        if (model.hands) {
+          // Assuming `hands` data
+          var hand = evt.detail.component.data.hand;
+          el.setAttribute(model.type, model.hands[hand]); // type e.g. 'obj-model' or 'json-model'
+        } else {
+          // Assuming single `data`
+          el.setAttribute(model.type, model.data);
+        }
       } else { return; }
 
       if (!!tooltips) {
