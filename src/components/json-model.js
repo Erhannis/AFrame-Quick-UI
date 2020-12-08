@@ -25,8 +25,8 @@ AFRAME.registerComponent('json-model', {
     if (!(!this.data.src || this.data.src === oldData.src)) {
       var src = this.data.src;
       this.objectLoader.load(this.data.src, callback);
-    } else if (!(!this.data.data || this.data.data === oldData.data)) { //TODO Does the second one do anything?
-      this.objectLoader.parse(this.data.data, callback);
+    } else if (!(!this.attrValue.data || this.attrValue.data === oldData.data)) { //TODO What's the difference between this.data and this.attrValue?  Why did one end up one place and the other end up the other?  //TODO Does the second one do anything?
+      this.objectLoader.parse(this.attrValue.data, callback);
     }
   }
 });
