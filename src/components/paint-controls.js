@@ -39,7 +39,7 @@ AFRAME.registerComponent('paint-controls', {
         //el.setAttribute('teleport-controls', {button: hand === 'left' ? 'ybutton' : 'bbutton'});
         el.setAttribute('obj-model', {obj: 'assets/models/oculus-' + hand + '-controller.obj', mtl: 'https://cdn.aframe.io/controllers/oculus/oculus-touch-controller-' + hand + '.mtl'});
       } else if (controllerName === 'vive-controls') {
-        el.setAttribute('json-model', {src: 'assets/models/controller_vive.json'});
+        el.setAttribute('json-model', CONTROLLER_MODEL);
       } else { return; }
 
       if (!!tooltips) {
