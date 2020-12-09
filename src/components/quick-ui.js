@@ -391,25 +391,39 @@ window.QuickUI = (function() {
             second = true;
         }
 
-        let hidePages = function() { //TODO Should probably keep track of which tab is active, instead
-            for (let i = 0; i < pages.length; i++) {
-                pages[i].setAttribute("visible",false);
-            }
-        }
-        hidePages();
+        let getOverrideMaterial = function() {
+            return {
+                color: "#88CCAA",
+                flatShading: true,
+                shader: 'flat',
+                transparent: true,
+                fog: false,
+                src: 'shader:flat'
+            };
+        };
 
         let tabButtons;
+        let resetTabs = function() { //TODO Should probably keep track of which tab is active, instead
+            for (let i = 0; i < pages.length; i++) {
+                pages[i].setAttribute("visible",false);
+                delete tabButtons[i].materials.override;
+            }
+        }
+
         if (tabs) {
             tabButtons = tabs;
         } else {
             tabButtons = [];
             for (let i = 0; i < pages.length; i++) {
                 tabButtons[i] = UiButton({text:(labels ? labels[i] : undefined), oncontrollerdown:function(){
-                    hidePages();
+                    resetTabs();
                     pages[i].setAttribute("visible", true);
+                    tabButtons[i].materials.override = getOverrideMaterial();
                 }});
             }
         }
+        
+        resetTabs();
 
         let gridOuter;
         let gridInner;

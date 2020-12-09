@@ -263,6 +263,12 @@ AFRAME.registerComponent('ui', {
           object.el.setAttribute("material", object.el.materials.selected);
         }
       });
+      // Apply material overrides //TODO Too heavy?  Not called at the right times?
+      this.el.querySelectorAll("*").forEach(function (object) {
+        if (object.materials && object.materials.override) {
+          object.setAttribute("material", object.materials.override);
+        }
+      });
     };
   })(),
 
