@@ -2,14 +2,14 @@
  * These are mostly my tests as I built the code.  They should provide a fairly comprehensive set of examples.
  * The code I use to generate random UI here gets a bit dense, but is largely unnecessary, so try not to get intimidated.
  */
-let UI = HandMenu;
+let UI = QuickUI;
 
 let rInt = function(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
 if (false) {
-    let handUi = UI.UiRoot(
+    let ui = UI.UiRoot(
     UI.FoldLayout(
         UI.GridLayout({cols:4},
         UI.UiButton({oncontrollerdown:(function(){this.setAttribute('color', '#88CCAA');}),size:[3,3]}),
@@ -24,13 +24,13 @@ if (false) {
     )
     );
 
-    uiEl.appendChild(handUi);
+    uiEl.appendChild(ui);
 }
 
 if (false) {
     let grid;
     let text;
-    let handUi = UI.UiRoot(
+    let ui = UI.UiRoot(
       grid = UI.GridLayout({cols:4},
         UI.UiButton({oncontrollerdown:(function(){
           setTimeout(() => {
@@ -48,9 +48,9 @@ if (false) {
         ...Array.from({length: 7}, x => UI.UiButton({size:[rInt(3)+1,rInt(3)+1]}))
       )
     );
-    handUi.setAttribute('position', '0 0.01 0');
+    ui.setAttribute('position', '0 0.01 0');
 
-    uiEl.appendChild(handUi);
+    uiEl.appendChild(ui);
 }
 
 if (false) {

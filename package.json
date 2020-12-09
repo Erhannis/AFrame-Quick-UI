@@ -1,14 +1,14 @@
 {
-  "name": "aframehandmenus",
+  "name": "aframe-quick-ui",
   "version": "1.0.0",
-  "description": "Hand-menus in A-Frame, extracted from A-Painter",
+  "description": "Quick UI in A-Frame, with hand-menus the primary use case.  Contains bits of A-Painter.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "gitrepo"
+    "url": "https://github.com/Erhannis/AFrame-Quick-UI.git"
   },
   "keywords": [
     "a-frame",

@@ -21,17 +21,17 @@ Dial
 let _ = require('lodash');
 
 //TODO Man, I should really nail down the name
-window.HandMenu = (function() {
+window.QuickUI = (function() {
     function loadUi(callback) {
         let uiEl = document.currentScript.parentElement.querySelector(".ui-container");
         if (!uiEl) { // I've seen it work both ways now, where sometimes the `ui`'s init runs before this script, and sometimes after.  A version difference, maybe?
           document.currentScript.parentElement.addEventListener('requestforui', function addUi ({detail:{uiEl}}) {
-            let ui = callback({UI:HandMenu});
-            uiEl.appendChild(HandMenu.UiRoot(ui));
+            let ui = callback({UI:QuickUI});
+            uiEl.appendChild(QuickUI.UiRoot(ui));
           });
         } else {
-          let ui = callback({UI:HandMenu});
-          uiEl.appendChild(HandMenu.UiRoot(ui));
+          let ui = callback({UI:QuickUI});
+          uiEl.appendChild(QuickUI.UiRoot(ui));
       }
     }
 
