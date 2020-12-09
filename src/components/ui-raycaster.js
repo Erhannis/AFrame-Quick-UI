@@ -11,8 +11,6 @@
  * @member {number} prevCheckTime - Previous time intersection was checked. To help interval.
  * @member {object} raycaster - three.js Raycaster.
  */
-
-console.log("ui-raycaster loading");
 AFRAME.registerComponent('ui-raycaster', {
   schema: {
     far: {default: Infinity}, // Infinity.
@@ -24,7 +22,6 @@ AFRAME.registerComponent('ui-raycaster', {
   },
 
   init: function () {
-    console.log("ui-raycaster init");
     this.direction = new THREE.Vector3();
     this.intersectedEls = [];
     this.objects = null;

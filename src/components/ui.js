@@ -181,15 +181,6 @@ AFRAME.registerComponent('ui', {
         callback(pressedObjects[key]);
       }
       var buttonName = pressedObjects[key].name;
-      switch (true) {
-        case buttonName === 'size': {
-          // self.onBrushSizeUp();
-          break;
-        }
-        default: {
-          break;
-        }
-      }
       unpressedObjects[buttonName] = pressedObjects[buttonName];
       delete pressedObjects[buttonName];
     });
@@ -221,6 +212,7 @@ AFRAME.registerComponent('ui', {
     return function () {
       var self = this;
       var pressedObjects = this.pressedObjects;
+      if (!this.triggeredPressed);
       var unpressedObjects = this.unpressedObjects;
       var selectedObjects = this.selectedObjects;
       // Remove hover highlights
@@ -265,6 +257,12 @@ AFRAME.registerComponent('ui', {
       });
       // Apply material overrides //TODO Too heavy?  Not called at the right times?
       this.el.querySelectorAll("*").forEach(function (object) {
+        if (!!object.resetMaterial) {
+            if (object.materials && object.materials.normal) {
+              object.setAttribute("material", object.materials.normal);
+            }
+            object.resetMaterial = false;
+        }
         if (object.materials && object.materials.override) {
           object.setAttribute("material", object.materials.override);
         }
@@ -427,6 +425,7 @@ AFRAME.registerComponent('ui', {
   onIntersectedCleared: function (evt) {
     if (!this.handEl) { return; }
     this.handEl.removeEventListener('triggerchanged', this.onTriggerChanged);
+    this.onTriggerChanged({detail:{value:0}});
   },
 
   updateRaycaster: (function () {

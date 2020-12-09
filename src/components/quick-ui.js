@@ -20,7 +20,6 @@ Dial
 
 let _ = require('lodash');
 
-//TODO Man, I should really nail down the name
 window.QuickUI = (function() {
     function loadUi(callback) {
         let uiEl = document.currentScript.parentElement.querySelector(".ui-container");
@@ -407,6 +406,7 @@ window.QuickUI = (function() {
             for (let i = 0; i < pages.length; i++) {
                 pages[i].setAttribute("visible",false);
                 delete tabButtons[i].materials.override;
+                tabButtons[i].resetMaterial = true; //TODO Feels like a growing hack
             }
         }
 
