@@ -1,6 +1,19 @@
 require('aframe');
 require('aframe-input-mapping-component');
 
+/* // To set the color scheme, provide window.UI_COLORS with any of the following overrides:
+window.UI_COLORS = {
+         normal:"#909090",
+          hover:"#88CCAA",
+        pressed:"#DDFFDD",
+       selected:"#DDAAAA", //TODO Selected isn't currently used for anything, oops
+       override:"#88BBBB", // Override takes precendence over the other colors, when present in an object's `materials` list.  I use it for the tab buttons.
+       btnColor:"#909090", // Note that btnColor usually overrides `normal`, since most visible things are buttons
+  btnLabelColor:"#000000",
+      textColor:"#FFFFFF"
+};
+*/
+
 require('./src/components/quick-ui.js');
 require('./src/systems/ui.js');
 require('./src/components/ui.js');

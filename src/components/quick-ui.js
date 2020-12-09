@@ -6,6 +6,10 @@
  * An entity's position/rotation/scale is controlled by its parent, not by the entity.
  * 
  * Some params are passed to children, but it's kinda inconsistent which ones.  I'm considering revamping that part of the system.
+ * 
+ * Note that most (perhaps all, even) params can be omitted.  ...Well, I think you need to specify cols or rows for GridLayout.
+ * The layouts with page-selection buttons (PageLayout, TabsLayout) take a `side` param for where the buttons should go.
+ * 
  */
 
 /* //TODO
@@ -19,6 +23,11 @@ Dial
 */
 
 let _ = require('lodash');
+
+if (window.UI_COLORS === undefined || !window.hasOwnProperty('UI_COLORS')) { //TODO There's probably a better way of doing this kind of thing
+    window.UI_COLORS = {};
+}
+window.UI_COLORS = _.merge({normal:"#909090", hover:"#88CCAA", pressed:"#DDFFDD", selected:"#DDAAAA", override:"#88BBBB", btnColor:"#909090", btnLabelColor:"#000000", textColor:"#FFFFFF"}, window.UI_COLORS);
 
 window.QuickUI = (function() {
     function loadUi(callback) {
@@ -42,7 +51,7 @@ window.QuickUI = (function() {
     }
 
     //TODO How to change text later?
-    function UiButton({oncontrollerdown, oncontrollerhold, oncontrollerup, color="#909090", text, textcolor="#000000", materials, size=[1,1]}={}) {
+    function UiButton({oncontrollerdown, oncontrollerhold, oncontrollerup, color=UI_COLORS.btnColor, text, textcolor=UI_COLORS.btnLabelColor, materials, size=[1,1]}={}) {
         let plane = UiEntity({type:"a-plane", color:color, materials:materials}); //TODO I don't know how to deal with the maxSize thing
         let s = [...size];
         plane.getSize = function(maxSize) {
@@ -69,7 +78,7 @@ window.QuickUI = (function() {
         return plane;
     }
 
-    function UiText({text="Text", color="#FFFFFF", textcolor,size=[1,1]}={}) {
+    function UiText({text="Text", color=UI_COLORS.textColor, textcolor,size=[1,1]}={}) {
         let ui = UiEntity({type: "a-text"});
         ui.setAttribute("value", text);
         ui.setAttribute("align", "center");
@@ -392,7 +401,7 @@ window.QuickUI = (function() {
 
         let getOverrideMaterial = function() {
             return {
-                color: "#88CCAA",
+                color: UI_COLORS.override,
                 flatShading: true,
                 shader: 'flat',
                 transparent: true,
@@ -626,7 +635,7 @@ window.QuickUI = (function() {
         let options = {type:"a-entity", maxSize:[1,1],
             materials:{ //TODO Do these even belong here?  Or are they only really applicable for buttons?
                 normal:{ //TODO Might not want to recurse into these, but I don't really have any good methods for that
-                    color: "#909090",
+                    color: UI_COLORS.normal,
                     flatShading: true,
                     shader: 'flat',
                     transparent: true,
@@ -634,7 +643,7 @@ window.QuickUI = (function() {
                     src: 'shader:flat'
                 },
                 hover:{
-                    color: "#FF0000",
+                    color: UI_COLORS.hover,
                     flatShading: true,
                     shader: 'flat',
                     transparent: true,
@@ -642,7 +651,7 @@ window.QuickUI = (function() {
                     src: 'shader:flat'
                 },
                 pressed:{
-                    color: "#FFDDDD", 
+                    color: UI_COLORS.pressed, 
                     flatShading: true,
                     shader: 'flat',
                     transparent: true,
@@ -650,7 +659,7 @@ window.QuickUI = (function() {
                     src: 'shader:flat'
                 },
                 selected:{
-                    color: "#DDAAAA", 
+                    color: UI_COLORS.selected, 
                     flatShading: true,
                     shader: 'flat',
                     transparent: true,
