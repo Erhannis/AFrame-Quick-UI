@@ -8,6 +8,7 @@ AFRAME.registerComponent('ui', {
 
     var el = this.el;
     var uiEl = this.uiEl = document.createElement('a-entity');
+    uiEl.ui = this; //TODO Hack?  Or acceptable?
     var rayEl = this.rayEl = document.createElement('a-entity');
     this.closed = true;
     this.isTooltipPaused = false;
@@ -18,6 +19,8 @@ AFRAME.registerComponent('ui', {
     this.pressedObjects = {};
     this.selectedObjects = {};
     this.unpressedObjects = {};
+    this.resettedObjects = new Set();
+    this.overriddenObjects = new Set();
     this.rayAngle = 45;
     this.rayDistance = 0.2; //TODO Optionize?
 
@@ -155,7 +158,7 @@ AFRAME.registerComponent('ui', {
   },
 
   handleButtonDown: function (object, position) {
-    var name = object.name;
+    var name = object.name; //TODO UH.  None of these buttons have names.  How is this working at all?
     if (this.activeWidget && this.activeWidget !== name) { return; } //TODO What is this?
     this.activeWidget = undefined;
     var callback;
@@ -214,7 +217,7 @@ AFRAME.registerComponent('ui', {
       var pressedObjects = this.pressedObjects;
       if (!this.triggeredPressed);
       var unpressedObjects = this.unpressedObjects;
-      var selectedObjects = this.selectedObjects;
+      var selectedObjects = this.selectedObjects; //TODO It would probably be better to use this than override
       // Remove hover highlights
       this.hoveredOffObjects.forEach(function (obj) {
         var object = obj.object;
@@ -255,14 +258,15 @@ AFRAME.registerComponent('ui', {
           object.el.setAttribute("material", object.el.materials.selected);
         }
       });
-      // Apply material overrides //TODO Too heavy?  Not called at the right times?
-      this.el.querySelectorAll("*").forEach(function (object) {
-        if (!!object.resetMaterial) {
-            if (object.materials && object.materials.normal) {
-              object.setAttribute("material", object.materials.normal);
-            }
-            object.resetMaterial = false;
+      // Resetted materials
+      this.resettedObjects.forEach(function (object) {
+        if (object.materials && object.materials.normal) {
+          object.setAttribute("material", object.materials.normal);
         }
+      });
+      this.resettedObjects.clear();
+      // Apply material overrides //TODO Not called at the right times?  Too heavy?  We could try to make this run only when something changes - atm it runs every tick or something
+      this.overriddenObjects.forEach(function (object) {
         if (object.materials && object.materials.override) {
           object.setAttribute("material", object.materials.override);
         }

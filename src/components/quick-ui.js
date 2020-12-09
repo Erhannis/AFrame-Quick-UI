@@ -406,7 +406,11 @@ window.QuickUI = (function() {
             for (let i = 0; i < pages.length; i++) {
                 pages[i].setAttribute("visible",false);
                 delete tabButtons[i].materials.override;
-                tabButtons[i].resetMaterial = true; //TODO Feels like a growing hack
+                let root = tabButtons[i].closest(".ui-container");
+                if (root) {
+                    root.ui.overriddenObjects.delete(tabButtons[i]);
+                    root.ui.resettedObjects.add(tabButtons[i]);
+                }
             }
         }
 
@@ -419,6 +423,10 @@ window.QuickUI = (function() {
                     resetTabs();
                     pages[i].setAttribute("visible", true);
                     tabButtons[i].materials.override = getOverrideMaterial();
+                    let root = tabButtons[i].closest(".ui-container");
+                    if (root) {
+                        root.ui.overriddenObjects.add(tabButtons[i]);
+                    }
                 }});
             }
         }
