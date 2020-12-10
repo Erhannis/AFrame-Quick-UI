@@ -1,4 +1,4 @@
-Package for A-Frame, to easily/quickly make UIs, with the primary use case of on-controller menus in mind.  Some of the code comes from A-Painter, in which context and codebase I originally wrote this code.  There may still be cruft left over, sorry.  See AFrame-Quick-UI-Test for an example of how to use it.  See also examples/quick-ui.js for examples of how to use different kinds of UI.  See src/components/quick-ui.js for the different layouts etc. available.  (There's a list at the bottom.)  Finally, if the previous are insufficient, here's a run down of how you might make a project that uses this package:
+Package for A-Frame, to easily/quickly make UIs, with the primary use case of on-controller menus in mind.  Some of the code comes from A-Painter, in which context and codebase I originally wrote this code.  There may still be cruft left over, sorry.  It also may be somewhat hacky or non-idiomatic in places; sorry again.  See AFrame-Quick-UI-Test for an example of how to use it.  See also examples/quick-ui.js for examples of how to use different kinds of UI.  See src/components/quick-ui.js (the core of the UI code) for the different layouts etc. available.  (There's a list at the bottom.)  Finally, if the previous are insufficient, here's a run down of how you might make a project that uses this package:
 
 ```
 npm init
@@ -24,36 +24,36 @@ In package.json, have `scripts` be:
 
 Create ./src/index.js :
 ```
-  require("aframe-quick-ui");
+require("aframe-quick-ui");
 ```
 
 Create ./index.html :
 ```
-    <html>
-        <head>
-            <script src="main.js"></script>
-        </head>
-        <body>
-          <a-scene>
+<html>
+    <head>
+        <script src="main.js"></script>
+    </head>
+    <body>
+        <a-scene>
             <a-entity id="cameraRig">
                 <a-entity id="acamera" camera wasd-controls look-controls orbit-controls></a-entity>
                 <a-entity id="left-hand"
-                  paint-controls="hand: left"
-                  ui>
+                    ui-controller="hand: left"
+                    ui>
                     <script> 
-                      QuickUI.loadUi(({UI}) =>
-                        UI.UiButton({text:"A", oncontrollerdown:()=>{console.log("log")}})
-                      );
+                        QuickUI.loadUi(({UI}) =>
+                            UI.UiButton({text:"A", oncontrollerdown:()=>{console.log("log")}})
+                        );
                     </script>
                 </a-entity>
                 <a-entity id="right-hand"
-                  paint-controls="hand: right"
-                  ui>
+                    ui-controller="hand: right"
+                    ui>
                 </a-entity>
-              </a-entity>
-          </a-scene>    
-        </body>
-    </html>
+            </a-entity>
+        </a-scene>    
+    </body>
+</html>
 ```
 
 ```

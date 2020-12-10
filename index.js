@@ -52,4 +52,4 @@ if (!window.CONTROLLER_MODELS["windows-motion"]) {
     window.CONTROLLER_MODELS["windows-motion"] = {type: "DUMMY", data: null};
 }
 
-require('./src/components/paint-controls.js');
+require('./src/components/ui-controller.js');

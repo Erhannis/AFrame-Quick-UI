@@ -1,5 +1,5 @@
 /* globals AFRAME THREE */
-AFRAME.registerComponent('paint-controls', {
+AFRAME.registerComponent('ui-controller', {
   dependencies: ['brush'],
 
   schema: {
