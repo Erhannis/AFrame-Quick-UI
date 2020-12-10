@@ -1,3 +1,5 @@
+![demo gif](https://github.com/Erhannis/AFrame-Quick-UI/blob/master/quick-ui-demo.gif)
+
 Package for A-Frame, to easily/quickly make UIs, with the primary use case of on-controller menus in mind.  Some of the code comes from A-Painter, in which context and codebase I originally wrote this code.  There may still be cruft left over, sorry.  It also may be somewhat hacky or non-idiomatic in places; sorry again.  See AFrame-Quick-UI-Test for an example of how to use it.  See also examples/quick-ui.js for examples of how to use different kinds of UI.  See src/components/quick-ui.js (the core of the UI code) for the different layouts etc. available.  (There's a list at the bottom.)  Finally, if the previous are insufficient, here's a run down of how you might make a project that uses this package:
 
 ```
