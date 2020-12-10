@@ -10,6 +10,7 @@
  * Note that most (perhaps all, even) params can be omitted.  ...Well, I think you need to specify cols or rows for GridLayout.
  * The layouts with page-selection buttons (PageLayout, TabsLayout) take a `side` param for where the buttons should go.
  * 
+ * Note that having many elements (e.g., over 100) can impact performance - less when they're not visible, but still some.
  */
 
 /* //TODO
