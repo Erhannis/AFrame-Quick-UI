@@ -16,7 +16,7 @@
     "menus",
     "ui"
   ],
-  "author": "",
+  "author": "Erhannis (https://github.com/Erhannis)",
   "license": "MIT",
   "dependencies": {
     "aframe": "^1.0.4",
